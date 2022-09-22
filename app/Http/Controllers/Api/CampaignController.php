@@ -37,7 +37,7 @@ class CampaignController extends Controller
     public function show($slug)
     {
         //get detail data campaign
-        $campaign = Campaign::with('user')->with('sumDonation')->where('slug', $slug)->first();
+        $campaign = Campaign::with('sumDonation')->where('slug', 'like', '%' . $slug . '%')->first();
 
         //get data donation by campaign
         $donations = Donation::with('donatur')->where('campaign_id', $campaign->id)->where('status', 'success')->latest()->get();
